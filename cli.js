@@ -3,47 +3,93 @@
 var fs = require('fs');
 var toc = require('./index.js');
 var utils = require('./lib/utils');
+var glob = require('glob');
+var path = require('path');
 var args = utils.minimist(process.argv.slice(2), {
-  boolean: ['i', 'json']
+  boolean: ['i'],
+  string: ['f'],
+  string: ['d'],
+  // default: {
+  //   d: path.resolve(process.cwd()),
+  //   f: path.resolve(process.cwd()) + '/index.md'
+  // },
+  alias: {h: 'help'}
 });
 
-if (args._.length !== 1) {
+
+if (!args.d || !args.f || args.h) {
   console.error([
-    'Usage: markdown-toc [--json] [-i] <input> ',
+    'Usage: adr-toc [-i] [-d <directory>] [-f <file>]',
     '',
-    '  input:  The markdown file to parse for table of contents,',
-    '          or "-" to read from stdin.',
+    '  directory:  The directory to be scanned for the *.md files',
+    '              If no <directory> is given, the current working directory will be chosen by default',
     '',
-    '  --json: Print the TOC in json format',
+    '  file:      The markdown file to contain the table of contents,',
+    '              If no <file> file is specified, a index.md file containing the TOC is created in the given directory.',
     '',
-    '  -i:     Edit the <input> file directly, injecting the TOC at <!-- toc -->',
-    '          (Without this flag, the default is to print the TOC to stdout.)'
+    '  -i:         Edit the <file> file directly, injecting the TOC at <!-- adrlog -->',
+    '              Using only the -i flag, the tool will scan the current working directory for all *.md files and inject the resulting adr-log into the default index.md file ',
+    '              (Without this flag, the default is to print the TOC to stdout.)',
+    '',
+    '  -d:         Scans the given <directory> for .md files and adds them to the TOC which gets injected into the <file>.',
+    '              (Without this flag, the current working directory will be chosen as default)',
+    '',
+    '  -f:         Option to specify the <file> in which the adr-log should be injected',
+    '              (Without this flag index.md will be chosen as default.)'
   ].join('\n'));
   process.exit(1);
 }
 
-if (args.i && args.json) {
-  console.error('markdown-toc: you cannot use both --json and -i');
-  process.exit(1);
-}
-
 if (args.i && args._[0] === '-') {
-  console.error('markdown-toc: you cannot use -i with "-" (stdin) for input');
+  console.error('adr-toc: you cannot use -i with "-" (stdin) for input');
   process.exit(1);
 }
 
 var input = process.stdin;
-if (args._[0] !== '-') input = fs.createReadStream(args._[0]);
 
-input.pipe(utils.concat(function(input) {
-  if (args.i) {
-    var newMarkdown = toc.insert(input.toString());
-    fs.writeFileSync(args._[0], newMarkdown);
+var defaultDir = path.resolve(process.cwd());
+var defaultFile = 'index.md';
+var dir = args.d || defaultDir;
+var tocFile = args.f || defaultFile;
+
+if (args.i) {
+  var headings = '';
+  var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
+
+  filenames.forEach(function (filename) {
+    headings += utils.headify(filename + '\n');
+  })
+
+  if (fs.existsSync(tocFile)) {
+
+    input = fs.createReadStream(tocFile);
+
+    input.pipe(utils.concat(function (input) {
+      var newMarkdown = toc.insertAdrToc(input.toString(), headings);
+      fs.writeFileSync(tocFile, newMarkdown);
+    }));
+
+
   } else {
-    var parsed = toc(input.toString());
-    output(parsed);
+    var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
+
+    fs.writeFileSync(dir + '/' + tocFile, toc.insertAdrToc(tocString, headings));
+
   }
-}));
+} else {
+  var headings = '';
+  var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
+
+  filenames.forEach(function (filename) {
+    headings += utils.headify(filename + '\n');
+  })
+  var parsed = toc(headings);
+  output(parsed);
+
+}
+
+
+
 
 input.on('error', function onErr(err) {
   console.error(err);

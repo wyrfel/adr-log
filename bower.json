@@ -1,11 +1,11 @@
 {
-  "name": "markdown-toc",
+  "name": "adr-toc",
   "description": "Generate a markdown TOC (table of contents) with Remarkable.",
-  "repository": "jonschlinkert/markdown-toc",
+  "repository": "adr/adr-log",
   "license": "MIT",
-  "homepage": "https://github.com/jonschlinkert/markdown-toc",
+  "homepage": "https://github.com/adr/adr-log",
   "authors": [
-    "Jon Schlinkert (https://github.com/jonschlinkert)"
+    "Tino Stadelmaier (https://github.com/tstadelmaier)"
   ],
   "main": [
     "index.js"
@@ -29,24 +29,17 @@
     "anchor",
     "commonmark",
     "docs",
-    "document",
     "documentation",
-    "heading",
-    "markdown",
-    "md",
     "glossary",
+    "heading",
     "index",
     "links",
-    "reference",
-    "readme",
+    "markdown",
+    "md",
     "remarkable",
-    "remarkableplugin",
-    "plugin",
-    "render",
-    "renderer",
-    "table-of-contents",
-    "table of contents",
     "table",
+    "table of contents",
+    "table-of-contents",
     "toc",
     "write"
   ]

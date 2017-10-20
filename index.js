@@ -33,6 +33,7 @@ function toc(str, options) {
  */
 
 toc.insert = require('./lib/insert');
+toc.insertAdrToc = require('./lib/insert');
 
 /**
  * Generate a markdown table of contents. This is the
@@ -43,6 +44,76 @@ toc.insert = require('./lib/insert');
  */
 
 function generate(options) {
+  var opts = utils.merge({firsth1: true, maxdepth: 6}, options);
+  var stripFirst = opts.firsth1 === false;
+  if (typeof opts.linkify === 'undefined') opts.linkify = true;
+
+  return function(md) {
+    md.renderer.render = function(tokens) {
+      tokens = tokens.slice();
+      var seen = {};
+      var len = tokens.length, i = 0, num = 0;
+      var tocstart = -1;
+      var arr = [];
+      var res = {};
+
+      while (len--) {
+        var token = tokens[i++];
+        if (/<!--[ \t]*toc[ \t]*-->/.test(token.content)) {
+          tocstart = token.lines[1];
+        }
+
+        if (token.type === 'heading_open') {
+          tokens[i].lvl = tokens[i - 1].hLevel;
+          tokens[i].i = num++;
+          arr.push(tokens[i]);
+        }
+      }
+
+      var result = [];
+      res.json = [];
+
+      // exclude headings that come before the actual
+      // table of contents.
+      var alen = arr.length, j = 0;
+      while (alen--) {
+        var tok = arr[j++];
+
+        if (tok.lines && (tok.lines[0] > tocstart)) {
+          var val = tok.content;
+          if (tok.children && tok.children[0].type === 'link_open') {
+            if (tok.children[1].type === 'text') {
+              val = tok.children[1].content;
+            }
+          }
+
+          if (!seen.hasOwnProperty(val)) {
+            seen[val] = 0;
+          } else {
+            seen[val]++;
+          }
+
+          tok.seen = opts.num = seen[val];
+          tok.slug = utils.slugify(val, opts);
+          res.json.push(utils.pick(tok, ['content', 'slug', 'lvl', 'i', 'seen']));
+          if (opts.linkify) tok = linkify(tok, opts);
+          result.push(tok);
+        }
+      }
+
+      opts.highest = highest(result);
+      res.highest = opts.highest;
+      res.tokens = tokens;
+
+      if (stripFirst) result = result.slice(1);
+      res.content = bullets(result, opts);
+      res.content += (opts.append || '');
+      return res;
+    };
+  };
+}
+
+function generateAdrToc(options) {
   var opts = utils.merge({firsth1: true, maxdepth: 6}, options);
   var stripFirst = opts.firsth1 === false;
   if (typeof opts.linkify === 'undefined') opts.linkify = true;
@@ -178,7 +249,7 @@ function highest(arr) {
  * Turn headings into anchors
  */
 
-function linkify(tok, options) {
+function linkify(tok, options, d) {
   var opts = utils.merge({}, options);
   if (tok && tok.content) {
     opts.num = tok.seen;
@@ -188,7 +259,7 @@ function linkify(tok, options) {
     if (opts && typeof opts.linkify === 'function') {
       return opts.linkify(tok, text, slug, opts);
     }
-    tok.content = utils.mdlink(text, '#' + slug);
+    tok.content = utils.mdlink(text,  slug);
   }
   return tok;
 }
@@ -210,6 +281,7 @@ function titleize(str, opts) {
     return opts.titleize(str, opts);
   }
   str = utils.getTitle(str);
+  str = str.split('.md')[0];
   str = str.split(/<\/?[^>]+>/).join('');
   str = str.split(/[ \t]+/).join(' ');
   return str.trim();

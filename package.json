@@ -1,31 +1,12 @@
 {
-  "name": "markdown-toc",
-  "description": "Generate a markdown TOC (table of contents) with Remarkable.",
-  "version": "1.1.0",
-  "homepage": "https://github.com/jonschlinkert/markdown-toc",
-  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "contributors": [
-    "(https://github.com/lu22do)",
-    "=^._.^= (http://maxogden.com)",
-    "Benjamin Schmitz (https://github.com/Vortex375)",
-    "Christian Raunitschka (raunitschka.de)",
-    "Daniel Chen (http://chendaniely.github.io)",
-    "David Mohl <github@dvcrn.io> (https://dvcrn.github.io)",
-    "Federico Soave (https://github.com/Feder1co5oave)",
-    "Gary Green (https://github.com/garygreen)",
-    "Jon Schlinkert <jon.schlinkert@sellside.com> (http://twitter.com/jonschlinkert)",
-    "Josh Duff (https://tehshrike.github.io)",
-    "Matt Ellis (http://sticklebackplastic.com)",
-    "Nicolas Morel <nicolas@morel.io> (https://github.com/Marsup)",
-    "Richard Bradley (https://github.com/RichardBradley)",
-    "Seth Vincent <sethvincent@gmail.com> (http://sethvincent.com)",
-    "Stefan Walther (http://qliksite.io)",
-    "Tao Wang <twang2218@gmail.com> (https://github.com/twang2218)",
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)"
-  ],
-  "repository": "jonschlinkert/markdown-toc",
+  "name": "adr-log",
+  "description": "Generate a markdown log of *.md files in a directory.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/adr/adr-log",
+  "author": "Tino Stadelmaier (https://github.com/tstadelmaier)",
+  "repository": "adr/adr-log",
   "bugs": {
-    "url": "https://github.com/jonschlinkert/markdown-toc/issues"
+    "url": "https://github.com/adr/adr-log/issues"
   },
   "license": "MIT",
   "files": [
@@ -35,7 +16,7 @@
   ],
   "main": "index.js",
   "bin": {
-    "markdown-toc": "cli.js"
+    "adr-log": "cli.js"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -46,6 +27,7 @@
   "dependencies": {
     "concat-stream": "^1.5.2",
     "diacritics-map": "^0.1.0",
+    "glob": "^7.1.2",
     "gray-matter": "^2.1.0",
     "lazy-cache": "^2.0.2",
     "list-item": "^1.1.1",
@@ -62,24 +44,16 @@
     "mocha": "^3.2.0"
   },
   "keywords": [
+    "adr",
     "anchor",
-    "commonmark",
     "docs",
-    "document",
     "documentation",
-    "glossary",
     "heading",
     "index",
     "links",
     "markdown",
     "md",
-    "plugin",
-    "readme",
-    "reference",
     "remarkable",
-    "remarkableplugin",
-    "render",
-    "renderer",
     "table",
     "table of contents",
     "table-of-contents",
