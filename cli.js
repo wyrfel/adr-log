@@ -17,7 +17,7 @@ var args = utils.minimist(process.argv.slice(2), {
 });
 
 
-if (!args.d || !args.f || args.h) {
+if (!args.d && !args.f && !args.i || args.h) {
   console.error([
     'Usage: adr-toc [-i] [-d <directory>] [-f <file>]',
     '',
