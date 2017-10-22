@@ -1,7 +1,7 @@
 {
   "name": "adr-log",
   "description": "Generate a markdown log of *.md files in a directory.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/adr/adr-log",
   "author": "Tino Stadelmaier (https://github.com/tstadelmaier)",
   "repository": "adr/adr-log",
