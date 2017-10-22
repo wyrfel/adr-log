@@ -1,19 +1,20 @@
 # adr-log [![NPM version](https://img.shields.io/npm/v/adr-log.svg?style=flat)](https://www.npmjs.com/package/adr-log)
 
-> Generate a markdown log of *.md files in a directory.
+> Generate an architectural decision log out of architectural decision records (ADRs).
 
 ## Table of Contents
 
+<!-- toc -->
+
 - [Install](#install)
 - [CLI](#cli)
-- [Highights](#highights)
 - [Usage](#usage)
-- [API](#api)
-  * [toc.plugin](#tocplugin)
-  * [toc.json](#tocjson)
-  * [toc.insert](#tocinsert)
-  * [Utility functions](#utility-functions)
-- [About](#about)
+  * [Examples](#examples)
+    + [Printing the adr log to stdout](#printing-the-adr-log-to-stdout)
+    + [Generating an index.md file containing the adr log](#generating-an-indexmd-file-containing-the-adr-log)
+- [License](#license)
+
+<!-- tocstop -->
 
 ## Install
 
@@ -48,9 +49,10 @@ Usage: adr-log [-i] [-d <directory>] [-f <file>] [-h]
 ```
 
 ## Usage
+
 ### Examples
 
-**logging the adrlog to stdout**
+#### Printing the adr log to stdout
 
 Using the tool in directory containing *.md files (e.g. test1.md, test2.md, test3.md, test4.md) with the following command:
 
@@ -66,7 +68,8 @@ will output the following log on your console:
 - [test3](test3.md)
 - [test4](test4.md)
 ```
-**Generating a index.md file containing the adrlog**
+
+#### Generating an index.md file containing the adr log
 
 Using the -i flag without specifying a file in which the generated log should be injected, like so:
 
@@ -74,7 +77,7 @@ Using the -i flag without specifying a file in which the generated log should be
 $ adr-log -i
 ```
 
-will by default generate a index.md file in the current working directory containing the log.
+will by default generate a `index.md` file in the current working directory containing the log.
 
 ```
 <!-- adrlog -->
@@ -93,7 +96,7 @@ For this to work the file must contain an opening `<!-- adrlog -->` code comment
 If the file already contains an adrlog surrounded by an opening `<!-- adrlog -->` and closing `<!-- adrlogstop -->` code comment, the existing log will be replaced.
 
 
-### License
+## License
 
 Copyright © 2017, [Tino Stadelmaier](https://github.com/tstadelmaier).
 Released under the [MIT License](LICENSE).
