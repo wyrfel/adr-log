@@ -1,6 +1,6 @@
 {
   "name": "adr-log",
-  "description": "Generate a markdown log of *.md files in a directory.",
+  "description": "Generate an architectural decision log out of architectural decision records (ADRs).",
   "version": "1.0.1",
   "homepage": "https://github.com/adr/adr-log",
   "author": "Tino Stadelmaier (https://github.com/tstadelmaier)",
@@ -45,6 +45,7 @@
   },
   "keywords": [
     "adr",
+    "archictural decision record",
     "anchor",
     "docs",
     "documentation",
@@ -72,21 +73,15 @@
     ],
     "related": {
       "list": [
-        "gfm-code-blocks",
+        "markdown-toc",
         "markdown-link",
-        "markdown-utils",
-        "pretty-remarkable",
-        "remarkable"
+        "markdown-utils"
       ]
     },
     "reflinks": [
       "gfm-code-blocks",
       "markdown-link",
-      "markdown-utils",
-      "pretty-remarkable",
-      "remarkable",
-      "verb",
-      "verb-readme-generator"
+      "markdown-utils"
     ],
     "lint": {
       "reflinks": true
