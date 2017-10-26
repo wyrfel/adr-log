@@ -59,7 +59,7 @@ if (args.i) {
   for (const filename of filenames) {
     headings += utils.headify(filename);
   }
-console.log(tocFile)
+  
   if (fs.existsSync(tocFile)) {
 
     input = fs.createReadStream(tocFile);
