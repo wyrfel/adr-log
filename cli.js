@@ -25,7 +25,7 @@ if (!args.d && !args.f && !args.i || args.h) {
     '              If no <directory> is given, the current working directory will be chosen by default',
     '',
     '  file:      The markdown file to contain the table of contents,',
-    '              If no <file> file is specified, a index.md file containing the TOC is created in the given directory.',
+    '              If no <file> file is specified, a index.md file containing the TOC is created in the current directory.',
     '',
     '  -i:         Edit the <file> file directly, injecting the TOC at <!-- adrlog -->',
     '              Using only the -i flag, the tool will scan the current working directory for all *.md files and inject the resulting adr-log into the default index.md file ',
@@ -59,7 +59,7 @@ if (args.i) {
   for (const filename of filenames) {
     headings += utils.headify(filename);
   }
-
+console.log(tocFile)
   if (fs.existsSync(tocFile)) {
 
     input = fs.createReadStream(tocFile);
@@ -73,7 +73,7 @@ if (args.i) {
   } else {
     var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
 
-    fs.writeFileSync(dir + '/' + tocFile, toc.insertAdrToc(tocString, headings, dir));
+    fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, headings, dir));
 
   }
 } else {
