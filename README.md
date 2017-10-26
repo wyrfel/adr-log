@@ -54,7 +54,7 @@ Usage: adr-log [-i] [-d <directory>] [-f <file>] [-h]
 
 #### Printing the adr log to stdout
 
-Consider a directory consisting of three files (0000-example-1.md, 0001-example-2.md, 0002-example-3.md).
+Consider a directory consisting of three files (`0000-example-1.md`, `0001-example-2.md`, `0002-example-3.md`).
 Execute following command:
 
 
@@ -64,7 +64,7 @@ $ adr-log -d .
 
 This outputs following log on your console:
 
-```
+```markdown
 - [ADR-0000](0000-example-1.md) - Example 1
 - [ADR-0001](0001-example-2.md) - Example 2
 - [ADR-0002](0002-example-3.md) - Example 3
@@ -74,7 +74,14 @@ This outputs following log on your console:
 
 Using `-i` alone (`adr-log -i`) generates a `index.md` file in the current working directory containing the log.
 
+
+```sh
+$ adr-log -i
 ```
+
+Result in `index.md`
+
+```markdown
 <!-- adrlog -->
 
 - [ADR-0000](0000-example-1.md) - Example 1
