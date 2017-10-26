@@ -99,5 +99,6 @@ If the file already contains an adrlog surrounded by an opening `<!-- adrlog -->
 
 ## License
 
-Copyright © 2017, [Tino Stadelmaier](https://github.com/tstadelmaier).
+Copyright © 2017, [Tino Stadelmaier](https://github.com/tstadelmaier), [Oliver Kopp](https://github.com/koppor), [Armin Hüneburg](https://github.com/hueneburg), [Tobias Wältken](https://github.com/mee4895).
+
 Released under the [MIT License](LICENSE).
