@@ -19,7 +19,7 @@ var args = utils.minimist(process.argv.slice(2), {
 
 if (!args.d && !args.f && !args.i || args.h) {
   console.error([
-    'Usage: adr-toc [-i] [-d <directory>] [-f <file>]',
+    'Usage: adr-log [-i] [-d <directory>] [-f <file>]',
     '',
     '  directory:  The directory to be scanned for the *.md files',
     '              If no <directory> is given, the current working directory will be chosen by default',
