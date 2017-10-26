@@ -74,7 +74,11 @@ function generate(options) {
           lines.push(origLines[i]);
         }
         const title = lines.join('').substr(2).trim();
-        res.content += `- [ADR-${token.content.match(/^\d+/m)[0].trim()}](${token.content}) - ${title}\n`
+        const numb = token.content.match(/^\d+/m);
+        if (numb === null || numb === undefined) {
+          continue;
+        }
+        res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title}\n`
       }
       res.content = res.content.trim();
       return res;
