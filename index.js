@@ -64,11 +64,6 @@ function generate(options) {
       for (const token of tokens) {
         let file;
         if (!toc.dir) {
-          try {
-            throw new Error()
-          } catch (e) {
-            console.log(e)
-          }
           return {content: ''};
         } else {
           file = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
