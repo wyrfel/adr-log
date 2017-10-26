@@ -25,13 +25,13 @@ if (!args.d && !args.f && !args.i || args.h) {
     '              If no <directory> is given, the current working directory will be chosen by default',
     '',
     '  file:      The markdown file to contain the table of contents,',
-    '              If no <file> file is specified, a index.md file containing the TOC is created in the current directory.',
+    '              If no <file> file is specified, a index.md file containing the log is created in the current directory.',
     '',
-    '  -i:         Edit the <file> file directly, injecting the TOC at <!-- adrlog -->',
+    '  -i:         Edit the <file> file directly, injecting the log at <!-- adrlog -->',
     '              Using only the -i flag, the tool will scan the current working directory for all *.md files and inject the resulting adr-log into the default index.md file ',
-    '              (Without this flag, the default is to print the TOC to stdout.)',
+    '              (Without this flag, the default is to print the log to stdout.)',
     '',
-    '  -d:         Scans the given <directory> for .md files and adds them to the TOC which gets injected into the <file>.',
+    '  -d:         Scans the given <directory> for .md files and adds them to the log which gets injected into the <file>.',
     '              (Without this flag, the current working directory will be chosen as default)',
     '',
     '  -f:         Option to specify the <file> in which the adr-log should be injected',
@@ -41,7 +41,7 @@ if (!args.d && !args.f && !args.i || args.h) {
 }
 
 if (args.i && args._[0] === '-') {
-  console.error('adr-toc: you cannot use -i with "-" (stdin) for input');
+  console.error('adr-log: you cannot use -i with "-" (stdin) for input');
   process.exit(1);
 }
 
