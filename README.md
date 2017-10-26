@@ -33,13 +33,13 @@ Usage: adr-log [-i] [-d <directory>] [-f <file>] [-h]
                 If no <directory> is given, the current working directory will be chosen by default
 
     file:       The markdown file to contain the table of contents
-                If no <file> file is specified, a index.md file containing the TOC is created in the given directory
+                If no <file> file is specified, a index.md file containing the log is created in the given directory
 
-    -i:         Edit the <file> file directly, injecting the TOC at <!-- adrlog -->
+    -i:         Edit the <file> file directly, injecting the log at <!-- adrlog -->
                 Using only the -i flag, the tool will scan the current working directory for all *.md files and inject the resulting adr-log into the default index.md file
-                (Without this flag, the default is to print the TOC to stdout.)
+                (Without this flag, the default is to print the log to stdout.)
 
-    -d:         Scans the given <directory> for .md files and adds them to the TOC which gets injected into the <file>
+    -d:         Scans the given <directory> for .md files and adds them to the log which gets injected into the <file>
                 (Without this flag, the current working directory will be chosen as default)
 
     -f:         Option to specify the <file> in which the adr-log should be injected
@@ -54,38 +54,32 @@ Usage: adr-log [-i] [-d <directory>] [-f <file>] [-h]
 
 #### Printing the adr log to stdout
 
-Using the tool in directory containing *.md files (e.g. test1.md, test2.md, test3.md, test4.md) with the following command:
+Consider a directory consisting of three files (0000-example-1.md, 0001-example-2.md, 0002-example-3.md).
+Execute following command:
+
 
 ```sh
-$ adr-log
+$ adr-log -d .
 ```
 
-will output the following log on your console:
+This outputs following log on your console:
 
 ```
-- [test1](test1.md)
-- [test2](test2.md)
-- [test3](test3.md)
-- [test4](test4.md)
+- [ADR-0000](0000-example-1.md) - Example 1
+- [ADR-0001](0001-example-2.md) - Example 2
+- [ADR-0002](0002-example-3.md) - Example 3
 ```
 
 #### Generating an index.md file containing the adr log
 
-Using the -i flag without specifying a file in which the generated log should be injected, like so:
-
-```sh
-$ adr-log -i
-```
-
-will by default generate a `index.md` file in the current working directory containing the log.
+Using `-i` alone (`adr-log -i`) generates a `index.md` file in the current working directory containing the log.
 
 ```
 <!-- adrlog -->
 
-- [test1](test1.md)
-- [test2](test2.md)
-- [test3](test3.md)
-- [test4](test4.md)
+- [ADR-0000](0000-example-1.md) - Example 1
+- [ADR-0001](0001-example-2.md) - Example 2
+- [ADR-0002](0002-example-3.md) - Example 3
 
 <!-- adrlogstop -->
 ```
