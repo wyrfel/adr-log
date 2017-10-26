@@ -25,7 +25,7 @@ if (!args.d && !args.f && !args.i || args.h) {
     '              If no <directory> is given, the current working directory will be chosen by default',
     '',
     '  file:      The markdown file to contain the table of contents,',
-    '              If no <file> file is specified, a index.md file containing the TOC is created in the given directory.',
+    '              If no <file> file is specified, a index.md file containing the TOC is created in the current directory.',
     '',
     '  -i:         Edit the <file> file directly, injecting the TOC at <!-- adrlog -->',
     '              Using only the -i flag, the tool will scan the current working directory for all *.md files and inject the resulting adr-log into the default index.md file ',
@@ -56,16 +56,16 @@ if (args.i) {
   var headings = '';
   var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
 
-  filenames.forEach(function (filename) {
-    headings += utils.headify(filename + '\n');
-  })
-
+  for (const filename of filenames) {
+    headings += utils.headify(filename);
+  }
+  
   if (fs.existsSync(tocFile)) {
 
     input = fs.createReadStream(tocFile);
 
     input.pipe(utils.concat(function (input) {
-      var newMarkdown = toc.insertAdrToc(input.toString(), headings);
+      var newMarkdown = toc.insertAdrToc(input.toString(), headings, dir);
       fs.writeFileSync(tocFile, newMarkdown);
     }));
 
@@ -73,17 +73,17 @@ if (args.i) {
   } else {
     var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
 
-    fs.writeFileSync(dir + '/' + tocFile, toc.insertAdrToc(tocString, headings));
+    fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, headings, dir));
 
   }
 } else {
   var headings = '';
   var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
 
-  filenames.forEach(function (filename) {
+  for (const filename of filenames) {
     headings += utils.headify(filename + '\n');
-  })
-  var parsed = toc(headings);
+  }
+  var parsed = toc(headings, dir);
   output(parsed);
 
 }
