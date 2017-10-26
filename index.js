@@ -6,6 +6,7 @@
 
 var utils = require('./lib/utils');
 var querystring = require('querystring');
+const fs = require('fs');
 
 /**
  * expose `toc`
@@ -22,7 +23,13 @@ module.exports = toc;
  * @return {String} Markdown-formatted table of contents
  */
 
-function toc(str, options) {
+function toc(str, options, dir) {
+  if (typeof options === 'string' && !dir) {
+    toc.dir = options;
+    options = null;
+  } else {
+    toc.dir = dir;
+  }
   return new utils.Remarkable()
     .use(generate(options))
     .render(str);
@@ -32,8 +39,8 @@ function toc(str, options) {
  * Expose `insert` method
  */
 
-toc.insert = require('./lib/insert');
-toc.insertAdrToc = require('./lib/insert');
+toc.insert = require('./lib/insert').insert;
+toc.insertAdrToc = require('./lib/insert').insertAdrToc;
 
 /**
  * Generate a markdown table of contents. This is the
@@ -50,64 +57,31 @@ function generate(options) {
 
   return function(md) {
     md.renderer.render = function(tokens) {
-      tokens = tokens.slice();
-      var seen = {};
-      var len = tokens.length, i = 0, num = 0;
-      var tocstart = -1;
-      var arr = [];
-      var res = {};
-
-      while (len--) {
-        var token = tokens[i++];
-        if (/<!--[ \t]*toc[ \t]*-->/.test(token.content)) {
-          tocstart = token.lines[1];
-        }
-
-        if (token.type === 'heading_open') {
-          tokens[i].lvl = tokens[i - 1].hLevel;
-          tokens[i].i = num++;
-          arr.push(tokens[i]);
-        }
-      }
-
-      var result = [];
-      res.json = [];
-
-      // exclude headings that come before the actual
-      // table of contents.
-      var alen = arr.length, j = 0;
-      while (alen--) {
-        var tok = arr[j++];
-
-        if (tok.lines && (tok.lines[0] > tocstart)) {
-          var val = tok.content;
-          if (tok.children && tok.children[0].type === 'link_open') {
-            if (tok.children[1].type === 'text') {
-              val = tok.children[1].content;
-            }
+      const res = {
+        content: ''
+      };
+      tokens = tokens.filter(t => !!t.content);
+      for (const token of tokens) {
+        let file;
+        if (!toc.dir) {
+          try {
+            throw new Error()
+          } catch (e) {
+            console.log(e)
           }
-
-          if (!seen.hasOwnProperty(val)) {
-            seen[val] = 0;
-          } else {
-            seen[val]++;
-          }
-
-          tok.seen = opts.num = seen[val];
-          tok.slug = utils.slugify(val, opts);
-          res.json.push(utils.pick(tok, ['content', 'slug', 'lvl', 'i', 'seen']));
-          if (opts.linkify) tok = linkify(tok, opts);
-          result.push(tok);
+          return {content: ''};
+        } else {
+          file = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
         }
+        const origLines = file.split('\n');
+        const lines = [];
+        for (let i = 0; i < origLines.length && i < 2; i++) {
+          lines.push(origLines[i]);
+        }
+        const title = lines.join('').substr(2).trim();
+        res.content += `- [ADR-${token.content.match(/^\d+/m)[0].trim()}](${token.content}) - ${title}\n`
       }
-
-      opts.highest = highest(result);
-      res.highest = opts.highest;
-      res.tokens = tokens;
-
-      if (stripFirst) result = result.slice(1);
-      res.content = bullets(result, opts);
-      res.content += (opts.append || '');
+      res.content = res.content.trim();
       return res;
     };
   };

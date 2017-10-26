@@ -56,16 +56,16 @@ if (args.i) {
   var headings = '';
   var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
 
-  filenames.forEach(function (filename) {
-    headings += utils.headify(filename + '\n');
-  })
+  for (const filename of filenames) {
+    headings += utils.headify(filename);
+  }
 
   if (fs.existsSync(tocFile)) {
 
     input = fs.createReadStream(tocFile);
 
     input.pipe(utils.concat(function (input) {
-      var newMarkdown = toc.insertAdrToc(input.toString(), headings);
+      var newMarkdown = toc.insertAdrToc(input.toString(), headings, dir);
       fs.writeFileSync(tocFile, newMarkdown);
     }));
 
@@ -73,17 +73,17 @@ if (args.i) {
   } else {
     var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
 
-    fs.writeFileSync(dir + '/' + tocFile, toc.insertAdrToc(tocString, headings));
+    fs.writeFileSync(dir + '/' + tocFile, toc.insertAdrToc(tocString, headings, dir));
 
   }
 } else {
   var headings = '';
   var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
 
-  filenames.forEach(function (filename) {
+  for (const filename of filenames) {
     headings += utils.headify(filename + '\n');
-  })
-  var parsed = toc(headings);
+  }
+  var parsed = toc(headings, dir);
   output(parsed);
 
 }
