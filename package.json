@@ -1,7 +1,7 @@
 {
   "name": "adr-log",
   "description": "Generate an architectural decision log out of architectural decision records (ADRs).",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "homepage": "https://github.com/adr/adr-log",
   "author": "Tino Stadelmaier (https://github.com/tstadelmaier)",
   "repository": "adr/adr-log",
