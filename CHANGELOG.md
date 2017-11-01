@@ -10,8 +10,8 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 ## [v1.1.0] - 2017-10-27
 
 ### Changed
-- Added CHANGELOG.md. [#2](https://github.com/adr/adr-log/issues/2)
-- Update README.md to reflect changed usage.[#3](https://github.com/adr/adr-log/issues/3)
+- We added a CHANGELOG.md. [#2](https://github.com/adr/adr-log/issues/2)
+- We update README.md to reflect changed usage. [#3](https://github.com/adr/adr-log/issues/3)
 
 ### Fixed 
 - Fix titles to printed in the correct format as described in [#5](https://github.com/adr/adr-log/issues/5).
@@ -19,7 +19,7 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 - Fix help to output "adr-log" instead of "adr-toc". [#4](https://github.com/adr/adr-log/issues/4)
 
 ### Removed
-- Removed bower.json. [#8](https://github.com/adr/adr-log/issues/8)
+- Removed `bower.json`. [#8](https://github.com/adr/adr-log/issues/8)
 
 ## [v1.0.1] - 2017-10-22
 
@@ -28,7 +28,6 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 ## [v1.0.0] - 2017-10-20
 
-### Changed
 Initial version of adr-log.
 
 [v1.1.0]: https://github.com/adr/adr-log/compare/adr:v1.0.1...v1.1.0
