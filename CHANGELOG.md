@@ -3,14 +3,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-Here, the categories "Changed" for added and changed functionality, "Fixed" for fixed functionality, and "Removed" for removed functionality are used.
 
 We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NUM`.
 
+## [unreleased]
+
+### Added
+- Support for comments after `adrlog` in `<!-- adrlog -->`. [#17](https://github.com/adr/adr-log/issues/17)
+
+### Fixed
+- The title of the first main heading is used (and not the second line if it is not empty). [#15](https://github.com/adr/adr-log/issues/15)
+
+
 ## [v1.1.0] - 2017-10-27
 
-### Changed
+### Added
 - We added a CHANGELOG.md. [#2](https://github.com/adr/adr-log/issues/2)
+
+### Changed
 - We update README.md to reflect changed usage. [#3](https://github.com/adr/adr-log/issues/3)
 
 ### Fixed 
@@ -30,6 +40,7 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 Initial version of adr-log.
 
+[unreleased]: https://github.com/adr/adr-log/compare/adr:v1.1.0...master
 [v1.1.0]: https://github.com/adr/adr-log/compare/adr:v1.0.1...v1.1.0
 [v1.0.1]: https://github.com/adr/adr-log/compare/adr:v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/adr/adr-log/compare/adr:360c142de47234334162691eb76a2509ea014199...v1.0.0
