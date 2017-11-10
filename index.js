@@ -70,11 +70,14 @@ function generate(options) {
           file = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
         }
         const origLines = file.split(os.EOL);
-        const lines = [];
-        for (let i = 0; i < origLines.length && i < 2; i++) {
-          lines.push(origLines[i]);
+        let index = 0;
+        if (origLines.length === 0 || (origLines.length === 1 && origLines[0].trim() === '')) {
+          continue;
         }
-        const title = lines.join('').substr(2).trim();
+        if (origLines[0].trim() === '') {
+          index = 1;
+        }
+        const title = origLines[index].trim();
         const numb = token.content.match(/^\d+/m);
         if (numb === null || numb === undefined) {
           continue;
