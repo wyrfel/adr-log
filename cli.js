@@ -53,44 +53,28 @@ var defaultFile = 'index.md';
 var dir = args.d || defaultDir;
 var tocFile = args.f || defaultFile;
 
-if (args.i) {
-  var headings = '';
-  var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
+var headings = '';
+var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
 
-  for (const filename of filenames) {
-    headings += utils.headify(filename);
-  }
-
-  if (fs.existsSync(tocFile)) {
-
-    input = fs.createReadStream(tocFile);
-
-    input.pipe(utils.concat(function (input) {
-      var newMarkdown = toc.insertAdrToc(input.toString(), headings, dir);
-      fs.writeFileSync(tocFile, newMarkdown);
-    }));
-
-
-  } else {
-    var tocString = '<!-- adrlog -->' + os.EOL + os.EOL + '<!-- adrlogstop -->' + os.EOL;
-
-    fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, headings, dir));
-
-  }
-} else {
-  var headings = '';
-  var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
-
-  for (const filename of filenames) {
-    headings += utils.headify(filename + os.EOL);
-  }
-  var parsed = toc(headings, dir);
-  output(parsed);
-
+for (const filename of filenames) {
+  headings += utils.headify(filename + '\n');
 }
 
+if (args.i && fs.existsSync(tocFile)) {
+  input = fs.createReadStream(tocFile);
 
+  input.pipe(utils.concat(function (input) {
+    var newMarkdown = toc.insertAdrToc(input.toString(), headings, dir);
+    fs.writeFileSync(tocFile, newMarkdown);
+  }));
+} else if (args.i) {
+  var tocString = '<!-- adrlog -->' + os.EOL + os.EOL + '<!-- adrlogstop -->' + os.EOL;
 
+  fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, headings, dir));
+} else {
+  var parsed = toc(headings, dir);
+  output(parsed);
+}
 
 input.on('error', function onErr(err) {
   console.error(err);
