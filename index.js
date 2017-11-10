@@ -7,6 +7,7 @@
 var utils = require('./lib/utils');
 var querystring = require('querystring');
 const fs = require('fs');
+const os = require('os');
 
 /**
  * expose `toc`
@@ -68,7 +69,7 @@ function generate(options) {
         } else {
           file = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
         }
-        const origLines = file.split('\n');
+        const origLines = file.split(os.EOL);
         const lines = [];
         for (let i = 0; i < origLines.length && i < 2; i++) {
           lines.push(origLines[i]);
@@ -78,7 +79,7 @@ function generate(options) {
         if (numb === null || numb === undefined) {
           continue;
         }
-        res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title}\n`
+        res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title + os.EOL}`
       }
       res.content = res.content.trim();
       return res;
@@ -197,7 +198,7 @@ function bullets(arr, options) {
     var lvl = ele.lvl - opts.highest;
     res.push(listitem(lvl, ele.content, opts));
   }
-  return res.join('\n');
+  return res.join(os.EOL);
 }
 
 /**

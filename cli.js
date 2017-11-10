@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const os = require('os');
 var fs = require('fs');
 var toc = require('./index.js');
 var utils = require('./lib/utils');
@@ -36,7 +37,7 @@ if (!args.d && !args.f && !args.i || args.h) {
     '',
     '  -f:         Option to specify the <file> in which the adr-log should be injected',
     '              (Without this flag index.md will be chosen as default.)'
-  ].join('\n'));
+  ].join(os.EOL));
   process.exit(1);
 }
 
@@ -59,7 +60,7 @@ if (args.i) {
   for (const filename of filenames) {
     headings += utils.headify(filename);
   }
-  
+
   if (fs.existsSync(tocFile)) {
 
     input = fs.createReadStream(tocFile);
@@ -71,7 +72,7 @@ if (args.i) {
 
 
   } else {
-    var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
+    var tocString = '<!-- adrlog -->' + os.EOL + os.EOL + '<!-- adrlogstop -->' + os.EOL;
 
     fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, headings, dir));
 
@@ -81,7 +82,7 @@ if (args.i) {
   var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
 
   for (const filename of filenames) {
-    headings += utils.headify(filename + '\n');
+    headings += utils.headify(filename + os.EOL);
   }
   var parsed = toc(headings, dir);
   output(parsed);
