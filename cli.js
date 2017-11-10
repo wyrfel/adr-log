@@ -75,9 +75,6 @@ if (args.i && fs.existsSync(tocFile)) {
   output(parsed);
 }
 
-
-
-
 input.on('error', function onErr(err) {
   console.error(err);
   process.exit(1);
