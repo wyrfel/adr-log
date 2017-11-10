@@ -8,6 +8,7 @@ var utils = require('./lib/utils');
 var querystring = require('querystring');
 const fs = require('fs');
 const os = require('os');
+let newline;
 
 /**
  * expose `toc`
@@ -40,7 +41,6 @@ function toc(str, options, dir) {
  * Expose `insert` method
  */
 
-toc.insert = require('./lib/insert').insert;
 toc.insertAdrToc = require('./lib/insert').insertAdrToc;
 
 /**
@@ -69,7 +69,16 @@ function generate(options) {
         } else {
           file = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
         }
-        const origLines = file.split(os.EOL);
+        if (file.indexOf('\n\r') > -1) {
+          newline = '\n\r';
+        } else if (file.indexOf('\r\n') > -1) {
+          newline = '\r\n';
+        } else if (file.indexOf('\r') > -1) {
+          newline = '\r';
+        } else {
+          newline = '\n';
+        }
+        const origLines = file.split(newline);
         let index = 0;
         if (origLines.length === 0 || (origLines.length === 1 && origLines[0].trim() === '')) {
           continue;
@@ -82,7 +91,7 @@ function generate(options) {
         if (numb === null || numb === undefined) {
           continue;
         }
-        res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title + os.EOL}`
+        res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title + newline}`
       }
       res.content = res.content.trim();
       return res;
@@ -153,7 +162,7 @@ function generateAdrToc(options) {
       res.tokens = tokens;
 
       if (stripFirst) result = result.slice(1);
-      res.content = bullets(result, opts);
+      res.content = bullets(result, opts, newline);
       res.content += (opts.append || '');
       return res;
     };
@@ -168,7 +177,7 @@ function generateAdrToc(options) {
  * @return {String}
  */
 
-function bullets(arr, options) {
+function bullets(arr, options, newline) {
   var opts = utils.merge({indent: '  '}, options);
   opts.chars = opts.chars || opts.bullets || ['-', '*', '+'];
   var unindent = 0;
@@ -201,7 +210,7 @@ function bullets(arr, options) {
     var lvl = ele.lvl - opts.highest;
     res.push(listitem(lvl, ele.content, opts));
   }
-  return res.join(os.EOL);
+  return res.join(newline);
 }
 
 /**
