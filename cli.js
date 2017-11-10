@@ -61,20 +61,16 @@ if (args.i) {
   }
 
   if (fs.existsSync(tocFile)) {
-
     input = fs.createReadStream(tocFile);
 
     input.pipe(utils.concat(function (input) {
       var newMarkdown = toc.insertAdrToc(input.toString(), headings, dir);
       fs.writeFileSync(tocFile, newMarkdown);
     }));
-
-
   } else {
     var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
 
     fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, headings, dir));
-
   }
 } else {
   var headings = '';
@@ -85,11 +81,7 @@ if (args.i) {
   }
   var parsed = toc(headings, dir);
   output(parsed);
-
 }
-
-
-
 
 input.on('error', function onErr(err) {
   console.error(err);
