@@ -16,6 +16,7 @@ var args = utils.minimist(process.argv.slice(2), {
   alias: {h: 'help'}
 });
 
+console.log(args)
 
 if (!args.d && !args.f && !args.i || args.h) {
   console.error([
@@ -52,40 +53,25 @@ var defaultFile = 'index.md';
 var dir = args.d || defaultDir;
 var tocFile = args.f || defaultFile;
 
-if (args.i) {
-  var headings = '';
-  var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
+var headings = '';
+var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
 
-  for (const filename of filenames) {
-    headings += utils.headify(filename);
-  }
+for (const filename of filenames) {
+  headings += utils.headify(filename + os.EOL);
+}
+var parsed = toc(headings, dir);
 
-  if (fs.existsSync(tocFile)) {
-
-    input = fs.createReadStream(tocFile);
-
-    input.pipe(utils.concat(function (input) {
-      var newMarkdown = toc.insertAdrToc(input.toString(), headings, dir);
-      fs.writeFileSync(tocFile, newMarkdown);
-    }));
-
-
-  } else {
-    var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
-
-    fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, headings, dir));
-
-  }
+if (args.i && fs.existsSync(tocFile)) {
+  input = fs.createReadStream(tocFile);
+  input.pipe(utils.concat(function (input) {
+    var newMarkdown = toc.insertAdrToc(input.toString(), parsed, dir);
+    fs.writeFileSync(tocFile, newMarkdown);
+  }));
+} else if (args.i) {
+  var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
+  fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, parsed, dir));
 } else {
-  var headings = '';
-  var filenames = glob.sync('!(' + tocFile.slice(0,-3) + '*).md', {cwd: dir});
-
-  for (const filename of filenames) {
-    headings += utils.headify(filename + '\n');
-  }
-  var parsed = toc(headings, dir);
   output(parsed);
-
 }
 
 
