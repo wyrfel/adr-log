@@ -69,15 +69,7 @@ function generate(options) {
         } else {
           file = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
         }
-        if (file.indexOf('\n\r') > -1) {
-          newline = '\n\r';
-        } else if (file.indexOf('\r\n') > -1) {
-          newline = '\r\n';
-        } else if (file.indexOf('\r') > -1) {
-          newline = '\r';
-        } else {
-          newline = '\n';
-        }
+        newline = utils.determineNewline(file);
         const origLines = file.split(newline);
         let index = 0;
         if (origLines.length === 0 || (origLines.length === 1 && origLines[0].trim() === '')) {
