@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NUM`.
 
-## [unreleased]
+## [v2.0.0] – 2017-11-18
 
 ### Added
 - Support for comments after `adrlog` in `<!-- adrlog -->`. [#17](https://github.com/adr/adr-log/issues/17)
@@ -20,7 +20,7 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 - When adrlog appears without closing adrlogstop, adr-log does not stop with an error anymore.
 - When adrlog does not appear, the log is created nevertheless.
 
-## [v1.1.0] - 2017-10-27
+## [v1.1.0] – 2017-10-27
 
 ### Added
 - We added a CHANGELOG.md. [#2](https://github.com/adr/adr-log/issues/2)
@@ -36,16 +36,17 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 ### Removed
 - Removed `bower.json`. [#8](https://github.com/adr/adr-log/issues/8)
 
-## [v1.0.1] - 2017-10-22
+## [v1.0.1] – 2017-10-22
 
 ### Fixed
 - Fix parsing of cli arguments. [#1](https://github.com/adr/adr-log/issues/1)
 
-## [v1.0.0] - 2017-10-20
+## [v1.0.0] – 2017-10-20
 
 Initial version of adr-log.
 
-[unreleased]: https://github.com/adr/adr-log/compare/adr:v1.1.0...master
+[unreleased]: https://github.com/adr/adr-log/compare/adr:v2.0.0...master
+[v2.0.0]: https://github.com/adr/adr-log/compare/adr:v1.1.0...v2.0.0
 [v1.1.0]: https://github.com/adr/adr-log/compare/adr:v1.0.1...v1.1.0
 [v1.0.1]: https://github.com/adr/adr-log/compare/adr:v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/adr/adr-log/compare/adr:360c142de47234334162691eb76a2509ea014199...v1.0.0
