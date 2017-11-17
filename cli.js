@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const os = require('os');
 var fs = require('fs');
 var toc = require('./index.js');
 var utils = require('./lib/utils');
@@ -36,7 +37,7 @@ if (!args.d && !args.f && !args.i || args.h) {
     '',
     '  -f:         Option to specify the <file> in which the adr-log should be injected',
     '              (Without this flag index.md will be chosen as default.)'
-  ].join('\n'));
+  ].join(os.EOL));
   process.exit(1);
 }
 
@@ -67,7 +68,7 @@ if (args.i && fs.existsSync(tocFile)) {
     fs.writeFileSync(tocFile, newMarkdown);
   }));
 } else if (args.i) {
-  var tocString = '<!-- adrlog -->\n\n<!-- adrlogstop -->\n';
+  var tocString = '<!-- adrlog -->' + os.EOL + os.EOL + '<!-- adrlogstop -->' + os.EOL;
 
   fs.writeFileSync(tocFile, toc.insertAdrToc(tocString, headings, dir));
 } else {

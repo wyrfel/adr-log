@@ -7,6 +7,8 @@
 var utils = require('./lib/utils');
 var querystring = require('querystring');
 const fs = require('fs');
+const os = require('os');
+let newline;
 
 /**
  * expose `toc`
@@ -39,7 +41,6 @@ function toc(str, options, dir) {
  * Expose `insert` method
  */
 
-toc.insert = require('./lib/insert').insert;
 toc.insertAdrToc = require('./lib/insert').insertAdrToc;
 
 /**
@@ -68,7 +69,8 @@ function generate(options) {
         } else {
           file = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
         }
-        const origLines = file.split('\n');
+        newline = utils.determineNewline(file);
+        const origLines = file.split(newline);
         let index = 0;
         if (origLines.length === 0 || (origLines.length === 1 && origLines[0].trim() === '')) {
           continue;
@@ -81,79 +83,9 @@ function generate(options) {
         if (numb === null || numb === undefined) {
           continue;
         }
-        res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title}\n`
+        res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title + newline}`
       }
       res.content = res.content.trim();
-      return res;
-    };
-  };
-}
-
-function generateAdrToc(options) {
-  var opts = utils.merge({firsth1: true, maxdepth: 6}, options);
-  var stripFirst = opts.firsth1 === false;
-  if (typeof opts.linkify === 'undefined') opts.linkify = true;
-
-  return function(md) {
-    md.renderer.render = function(tokens) {
-      tokens = tokens.slice();
-      var seen = {};
-      var len = tokens.length, i = 0, num = 0;
-      var tocstart = -1;
-      var arr = [];
-      var res = {};
-
-      while (len--) {
-        var token = tokens[i++];
-        if (/<!--[ \t]*toc[ \t]*-->/.test(token.content)) {
-          tocstart = token.lines[1];
-        }
-
-        if (token.type === 'heading_open') {
-          tokens[i].lvl = tokens[i - 1].hLevel;
-          tokens[i].i = num++;
-          arr.push(tokens[i]);
-        }
-      }
-
-      var result = [];
-      res.json = [];
-
-      // exclude headings that come before the actual
-      // table of contents.
-      var alen = arr.length, j = 0;
-      while (alen--) {
-        var tok = arr[j++];
-
-        if (tok.lines && (tok.lines[0] > tocstart)) {
-          var val = tok.content;
-          if (tok.children && tok.children[0].type === 'link_open') {
-            if (tok.children[1].type === 'text') {
-              val = tok.children[1].content;
-            }
-          }
-
-          if (!seen.hasOwnProperty(val)) {
-            seen[val] = 0;
-          } else {
-            seen[val]++;
-          }
-
-          tok.seen = opts.num = seen[val];
-          tok.slug = utils.slugify(val, opts);
-          res.json.push(utils.pick(tok, ['content', 'slug', 'lvl', 'i', 'seen']));
-          if (opts.linkify) tok = linkify(tok, opts);
-          result.push(tok);
-        }
-      }
-
-      opts.highest = highest(result);
-      res.highest = opts.highest;
-      res.tokens = tokens;
-
-      if (stripFirst) result = result.slice(1);
-      res.content = bullets(result, opts);
-      res.content += (opts.append || '');
       return res;
     };
   };
@@ -167,7 +99,7 @@ function generateAdrToc(options) {
  * @return {String}
  */
 
-function bullets(arr, options) {
+function bullets(arr, options, newline) {
   var opts = utils.merge({indent: '  '}, options);
   opts.chars = opts.chars || opts.bullets || ['-', '*', '+'];
   var unindent = 0;
@@ -200,7 +132,7 @@ function bullets(arr, options) {
     var lvl = ele.lvl - opts.highest;
     res.push(listitem(lvl, ele.content, opts));
   }
-  return res.join('\n');
+  return res.join(newline);
 }
 
 /**
