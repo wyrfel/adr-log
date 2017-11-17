@@ -6,7 +6,7 @@ This log lists the architectural decisions for adr-log.
 
 - [ADR-0000](0000-use-markdown-architectural-decision-records.md) - Use Markdown Architectural Decision Records
 - [ADR-0001](0001-extend-markdown-toc.md) - Extend markdown-toc
-- [ADR-0002](0002-use-minimist-as-argument-processor.md) - Use console-log-level as logging framework
+- [ADR-0002](0002-use-console-stamp-as-logging-framework.md) - Use console-stamp as logging framework
 
 <!-- adrlogstop -->
 

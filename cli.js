@@ -13,7 +13,6 @@ require('console-stamp')(console, {
 });
 
 const os = require('os');
-const log = require('console-log-level')({ level: 'debug' })
 var fs = require('fs');
 var toc = require('./index.js');
 var utils = require('./lib/utils');

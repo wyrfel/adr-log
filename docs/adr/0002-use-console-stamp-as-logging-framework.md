@@ -1,11 +1,11 @@
-# Use console-log-level as logging framework
+# Use console-stamp as logging framework
 
 The tool should provide debug logging functionality.
 
 ## Considered Alternatives
 
-* `conssole.log`
 * [console-stamp](https://www.npmjs.com/package/console-stamp)
+* `conssole.log`
 * [console-log-level](https://github.com/watson/console-log-level)
 * [winston](https://www.npmjs.com/package/winston)
 * [beautylog](https://www.npmjs.com/package/beautylog)

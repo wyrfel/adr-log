@@ -27,7 +27,6 @@
     "adr-log": "cli.js"
   },
   "dependencies": {
-    "console-log-level": "^1.4.0",
     "console-stamp": "^0.2.6",
     "glob": "^7.1.2",
     "gray-matter": "^2.1.0",
