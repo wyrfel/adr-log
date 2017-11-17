@@ -12,6 +12,7 @@
   * [Examples](#examples)
     + [Printing the adr log to stdout](#printing-the-adr-log-to-stdout)
     + [Generating an index.md file containing the adr log](#generating-an-indexmd-file-containing-the-adr-log)
+- [Developing](#developing)
 - [License](#license)
 
 <!-- tocstop -->
@@ -89,6 +90,15 @@ Result in following `index.md`:
 
 <!-- adrlogstop -->
 ```
+
+
+## Developing
+
+- Run `node cli.js` to execute the CLI.
+  Also works with relative directgories.
+  E.g., `node ../../../adr-log/cli.js -d .` runs adr-log and outputs the result to the console.
+- You can turn on debugging output by adjusting lines 6 and 7 in `cli.js`.
+- Use [relase-it](https://www.npmjs.com/package/release-it) for release management.
 
 
 ## License
