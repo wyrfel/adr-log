@@ -6,13 +6,10 @@
 
 var utils = require('./lib/utils');
 const fs = require('fs');
-const os = require('os');
-let newline;
 
 /**
  * expose `toc`
  */
-
 module.exports = toc;
 
 /**
@@ -23,7 +20,6 @@ module.exports = toc;
  * @param  {Object} `options`
  * @return {String} Markdown-formatted table of contents
  */
-
 function toc(str, options, dir) {
   if (typeof options === 'string' && !dir) {
     toc.dir = options;
@@ -44,15 +40,8 @@ toc.insertAdrToc = require('./lib/insert').insertAdrToc;
 /**
  * Generate a markdown table of contents. This is the
  * function that does all of the main work with Remarkable.
- *
- * @param {Object} `options`
- * @return {String}
  */
-
-function generate(options) {
-  var opts = utils.merge({firsth1: true, maxdepth: 6}, options);
-  if (typeof opts.linkify === 'undefined') opts.linkify = true;
-
+function generate() {
   return function(md) {
     md.renderer.render = function(tokens) {
       const res = {
