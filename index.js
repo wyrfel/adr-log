@@ -68,7 +68,16 @@ function generate(options) {
         if (numb === null || numb === undefined) {
           continue;
         }
-        const content = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
+        var content = fs.readFileSync(`${toc.dir}/${token.content}`).toString();
+
+        // does the file have front-matter?
+        if (/^---/.test(content)) {
+          // extract it temporarily so the syntax
+          // doesn't get mistaken for a heading
+          var obj = utils.matter(content);
+          content = obj.content;
+        }
+
         const newline = utils.determineNewline(content);
         const title = content.split(newline)[0].substr(2);
         console.log(title);
