@@ -37,8 +37,7 @@
     "remarkable": "^1.7.1"
   },
   "devDependencies": {
-    "gulp-format-md": "^0.1.11",
-    "mocha": "^3.2.0"
+    "gulp-format-md": "^0.1.11"
   },
   "keywords": [
     "adr",
@@ -83,8 +82,5 @@
     "lint": {
       "reflinks": true
     }
-  },
-  "directories": {
-    "test": "test"
   }
 }
