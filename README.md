@@ -67,14 +67,18 @@ This outputs following log on your console:
 
 #### Generating an index.md file containing the adr log
 
-Using `-i` alone (`adr-log -i`) generates a `index.md` file in the current working directory containing the log.
+Since this is basically a fork of [Jon Schlinkert's](https://github.com/jonschlinkert) [markdown-toc](https://github.com/jonschlinkert/markdown-toc), you can also choose to insert the log into an existing file.
+For this to work the file must contain an opening `<!-- adrlog -->` code comment, after which the log will be inserted.
 
+If the file already contains an adrlog surrounded by an opening `<!-- adrlog -->` and closing `<!-- adrlogstop -->` code comment, the existing is be replaced.
+
+Using `-i` alone (`adr-log -i`) generates an `index.md` file in the current working directory containing the log.
 
 ```sh
 $ adr-log -i
 ```
 
-Result in `index.md`
+Result in following `index.md`:
 
 ```markdown
 <!-- adrlog -->
@@ -85,11 +89,6 @@ Result in `index.md`
 
 <!-- adrlogstop -->
 ```
-
-Since this is basically a fork of [Jon Schlinkert's](https://github.com/jonschlinkert) [markdown-toc](https://github.com/jonschlinkert/markdown-toc), you can also choose to insert the log into an existing file.
-For this to work the file must contain an opening `<!-- adrlog -->` code comment, after which the log will be inserted.
-
-If the file already contains an adrlog surrounded by an opening `<!-- adrlog -->` and closing `<!-- adrlogstop -->` code comment, the existing log will be replaced.
 
 
 ## License
