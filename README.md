@@ -27,25 +27,20 @@ $ npm install -g adr-log
 ## CLI
 
 ```
-Usage: adr-log [-i] [-d <directory>] [-f <file>] [-h]
+Usage: adr-log [-d <directory>] [-i] <input>
 
-    directory:  The directory to be scanned for the *.md files
-                If no <directory> is given, the current working directory will be chosen by default
+  input:  The markdown file to contain the table of contents.
+          If no <input> file is specified, an index.md file containing the log is created in the current directory.
 
-    file:       The markdown file to contain the table of contents
-                If no <file> file is specified, a index.md file containing the log is created in the given directory
+  -i:     Edit the <input> file directly, injecting the log at <!-- adrlog -->.
+          Using only the -i flag, the tool will scan the current working directory for all *.md files and
+          inject the resulting adr-log into the default index.md file.
+          (Without this flag, the default is to print the log to stdout.)
 
-    -i:         Edit the <file> file directly, injecting the log at <!-- adrlog -->
-                Using only the -i flag, the tool will scan the current working directory for all *.md files and inject the resulting adr-log into the default index.md file
-                (Without this flag, the default is to print the log to stdout.)
+  -d:     Scans the given <directory> for .md files.
+          (Without this flag, the current working directory is chosen as default.)
 
-    -d:         Scans the given <directory> for .md files and adds them to the log which gets injected into the <file>
-                (Without this flag, the current working directory will be chosen as default)
-
-    -f:         Option to specify the <file> in which the adr-log should be injected
-                (Without this flag index.md will be chosen as default.)
-
-    -h:         Shows how to use this module
+  -h:     Shows how to use this program
 ```
 
 ## Usage
@@ -99,6 +94,6 @@ If the file already contains an adrlog surrounded by an opening `<!-- adrlog -->
 
 ## License
 
-Copyright © 2017, [Tino Stadelmaier](https://github.com/tstadelmaier), [Oliver Kopp](https://github.com/koppor), [Armin Hüneburg](https://github.com/hueneburg), [Tobias Wältken](https://github.com/mee4895).
+Copyright © 2017 [Tino Stadelmaier](https://github.com/tstadelmaier), [Oliver Kopp](https://github.com/koppor), [Armin Hüneburg](https://github.com/hueneburg), [Tobias Wältken](https://github.com/mee4895).
 
 Released under the [MIT License](LICENSE).
