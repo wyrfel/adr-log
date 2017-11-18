@@ -98,7 +98,8 @@ Result in following `index.md`:
   Also works with relative directgories.
   E.g., `node ../../../adr-log/cli.js -d .` runs adr-log and outputs the result to the console.
 - You can turn on debugging output by adjusting lines 6 and 7 in `cli.js`.
-- Use [relase-it](https://www.npmjs.com/package/release-it) for release management.
+- Use [relase-it](https://www.npmjs.com/package/release-it) and [github-release-from-changelog](https://github.com/MoOx/github-release-from-changelog) for release management.
+  See also [ADR-0003](docs/adr/0003-use-release-it-and-github-release-from-changelog-as-release-tooling.md).
 
 
 ## License
