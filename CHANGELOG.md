@@ -8,6 +8,12 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 ## [unreleased]
 
+### Changed
+
+- Really using the format of "Keep a Changelog": Versions are indicated without prefix `v`.
+  E.g., `v1.0.0` is now `1.0.0`.
+  This is also the format supported by @sindresorhus's [np](https://github.com/sindresorhus/np).
+
 ## [2.0.0] – 2017-11-18
 
 ### Added
