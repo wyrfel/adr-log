@@ -1,7 +1,7 @@
 {
   "name": "adr-log",
   "description": "Generate an architectural decision log out of architectural decision records (ADRs).",
-  "version": "2.0.0",
+  "version": "1.1.0",
   "homepage": "https://adr.github.io/adr-log/",
   "author": "Oliver Kopp (http://github.com/koppor/)",
   "conttributors": [
