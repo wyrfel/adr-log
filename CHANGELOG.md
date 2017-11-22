@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NUM`.
 
-## [2.1.0]
+## [unreleased]
+
+## [2.1.0] – 2017-11-23
 
 ### Added
 
