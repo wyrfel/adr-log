@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NUM`.
 
-## [unreleased]
+## [2.1.0]
 
 ### Added
 
@@ -59,7 +59,8 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 Initial version of adr-log.
 
-[unreleased]: https://github.com/adr/adr-log/compare/adr:2.0.0...master
+[unreleased]: https://github.com/adr/adr-log/compare/adr:2.1.0...master
+[2.0.0]: https://github.com/adr/adr-log/compare/adr:2.0.0...2.1.0
 [2.0.0]: https://github.com/adr/adr-log/compare/adr:1.1.0...2.0.0
 [1.1.0]: https://github.com/adr/adr-log/compare/adr:1.0.1...1.1.0
 [1.0.1]: https://github.com/adr/adr-log/compare/adr:1.0.0...1.0.1
