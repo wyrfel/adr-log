@@ -15,7 +15,7 @@ The CHANGELOG.md should be automatically put as content in the GitHub releases, 
 
 ## Decision Outcome
 
-* Chosen Alternative: Combiation between release-it (run first) and github-release-from-changelog (run second), because all other tools do not work.
+* Chosen Alternative: Combination between release-it (run first) and github-release-from-changelog (run second), because all other tools do not work.
 * npmpub has issues on Windows: https://github.com/MoOx/npmpub/issues/19
 * ng has issues on Windows: https://github.com/sindresorhus/np/issues/204
 * npm-github-release does not read CHANGELOG.md, but demands text
