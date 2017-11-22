@@ -8,6 +8,12 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 ## [unreleased]
 
+### Added
+
+- Add support for numbering in heading as used at [adr-tools](https://github.com/npryce/adr-tools):
+  They are removed when generating the log.
+  Fixes [#23](https://github.com/adr/adr-log/issues/23).
+
 ### Changed
 
 - Really using the format of "Keep a Changelog": Versions are indicated without prefix `v`.

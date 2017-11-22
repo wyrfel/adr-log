@@ -40,6 +40,8 @@ toc.insertAdrToc = require('./lib/insert').insertAdrToc;
 /**
  * Generate a markdown table of contents. This is the
  * function that does all of the main work with Remarkable.
+ *
+ * This is the core implementation. Here, the file contents (docs/adr/dddd-*.md) are parsed and transformed into markdown.
  */
 function generate() {
   return function(md) {
@@ -68,8 +70,10 @@ function generate() {
         }
 
         const newline = utils.determineNewline(content);
-        const title = content.split(newline)[0].substr(2);
-        console.log(title);
+        var title = content.split(newline)[0].substr(2);
+        console.log("title before decimal removal: ", title);
+        title = title.replace(/^\d+\. /, '');
+        console.log("title after decimal removal:  ", title);
         res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title + newline}`
       }
       res.content = res.content.trim();
