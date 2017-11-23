@@ -8,6 +8,10 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 ## [unreleased]
 
+### Fixed
+
+- Fixed changelog for 2.1.0: added link and date
+
 ## [2.1.0] – 2017-11-23
 
 ### Added
