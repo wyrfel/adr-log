@@ -18,5 +18,5 @@ The release process should be automated.
 * Chosen Alternative: Combination between release-it (run first) and github-release-from-changelog (run second), because all other tools do not work.
 * npmpub has issues on Windows: https://github.com/MoOx/npmpub/issues/19
 * ng has issues on Windows: https://github.com/sindresorhus/np/issues/204
-* npm-github-release does not read CHANGELOG.md, but demands text
+* npm-github-release does not read `CHANGELOG.md`, but demands text
 * semantic-release seems to be over-engieered
