@@ -13,6 +13,7 @@
     + [Printing the adr log to stdout](#printing-the-adr-log-to-stdout)
     + [Generating an index.md file containing the adr log](#generating-an-indexmd-file-containing-the-adr-log)
 - [Developing](#developing)
+- [Related Tooling](#related-tooling)
 - [License](#license)
 
 <!-- tocstop -->
@@ -100,6 +101,18 @@ Result in following `index.md`:
 - You can turn on debugging output by adjusting lines 6 and 7 in `cli.js`.
 - Use [relase-it](https://www.npmjs.com/package/release-it) and [github-release-from-changelog](https://github.com/MoOx/github-release-from-changelog) for release management.
   See also [ADR-0003](docs/adr/0003-use-release-it-and-github-release-from-changelog-as-release-tooling.md).
+
+
+## Related Tooling
+
+[adr-tools](https://github.com/npryce/adr-tools) is the most prominent realted tool.
+It supports generating an ADR log by using `adr generate toc`.
+An example to can be invesitaged at <https://github.com/npryce/adr-tools/blob/master/tests/generate-contents.expected>.
+
+The difference to adr-log is
+
+1. adr-log is available using `npm` and thus more easy to install.
+2. adr-tools does not include the heading of each ADR into the output.
 
 
 ## License
