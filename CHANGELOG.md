@@ -8,6 +8,10 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 ## [unreleased]
 
+### Added
+
+- Difference to `adr generate toc` (from [adr-tools](https://github.com/npryce/adr-tools)) is explained in the README.md.
+
 ### Fixed
 
 - Fixed changelog for 2.1.0: added link and date
