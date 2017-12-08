@@ -1,7 +1,7 @@
 # Use release-it and github-release-from-changelog for releasing
 
 The release process should be automated.
-`CHANGELOG.md` should be automatically put as content in the GitHub releases, because [Sibbell](https://about.sibbell.com/) puts that content in emails annoucning a new release.
+`CHANGELOG.md` should be automatically put as content in the GitHub releases, because [Sibbell](https://about.sibbell.com/) puts that content in emails announcing a new release.
 
 ## Considered Alternatives
 
