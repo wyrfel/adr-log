@@ -44,8 +44,8 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 ### Fixed
 - The title of the first main heading is used (and not the second line if it is not empty). [#15](https://github.com/adr/adr-log/issues/15)
-- When adrlog appears without closing adrlogstop, adr-log does not stop with an error anymore.
-- When adrlog does not appear, the log is created nevertheless.
+- When `adrlog` appears without closing `adrlogstop`, adr-log does not stop with an error anymore.
+- When `adrlog` does not appear, the log is created nevertheless.
 
 ## [1.1.0] – 2017-10-27
 
