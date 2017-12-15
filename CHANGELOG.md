@@ -14,6 +14,7 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 ### Fixed
 
+- Correctly keeps Windows line endings. [#24](https://github.com/adr/adr-log/issues/24)
 - Fixed changelog for 2.1.0: added link and date
 
 ## [2.1.0] – 2017-11-23
