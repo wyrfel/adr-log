@@ -105,9 +105,9 @@ Result in following `index.md`:
 
 ## Related Tooling
 
-[adr-tools](https://github.com/npryce/adr-tools) is the most prominent realted tool.
+[adr-tools](https://github.com/npryce/adr-tools) is the most prominent related tool.
 It supports generating an ADR log by using `adr generate toc`.
-An example to can be invesitaged at <https://github.com/npryce/adr-tools/blob/master/tests/generate-contents.expected>.
+An example to can be investigated at <https://github.com/npryce/adr-tools/blob/master/tests/generate-contents.expected>.
 
 The difference to adr-log is
 
