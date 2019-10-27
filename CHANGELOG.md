@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
@@ -6,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NUM`.
 
-## [unreleased]
+## [2.1.2] – 2019-10-27
+
+### Fixed
+
+- Updated package versions to fix vulnerabilities
 
 ## [2.1.1] – 2017-12-15
 
@@ -40,9 +45,11 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 - Initial support for headers (`---`) in `ADR-*.md` files.
 
 ### Changed
+
 - Updated CLI syntax to be more conform with [markdown-toc](https://github.com/jonschlinkert/markdown-toc).
 
 ### Fixed
+
 - The title of the first main heading is used (and not the second line if it is not empty). [#15](https://github.com/adr/adr-log/issues/15)
 - When `adrlog` appears without closing `adrlogstop`, adr-log does not stop with an error anymore.
 - When `adrlog` does not appear, the log is created nevertheless.
@@ -50,29 +57,35 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 ## [1.1.0] – 2017-10-27
 
 ### Added
+
 - We added a CHANGELOG.md. [#2](https://github.com/adr/adr-log/issues/2)
 
 ### Changed
+
 - We update README.md to reflect changed usage. [#3](https://github.com/adr/adr-log/issues/3)
 
 ### Fixed 
+
 - Fix titles to printed in the correct format as described in [#5](https://github.com/adr/adr-log/issues/5).
 - Fix output of help to use "LOG" instead of "TOC". [#6](https://github.com/adr/adr-log/issues/6)
 - Fix help to output "adr-log" instead of "adr-toc". [#4](https://github.com/adr/adr-log/issues/4)
 
 ### Removed
+
 - Removed `bower.json`. [#8](https://github.com/adr/adr-log/issues/8)
 
 ## [1.0.1] – 2017-10-22
 
 ### Fixed
+
 - Fix parsing of cli arguments. [#1](https://github.com/adr/adr-log/issues/1)
 
 ## [1.0.0] – 2017-10-20
 
 Initial version of adr-log.
 
-[unreleased]: https://github.com/adr/adr-log/compare/adr:2.1.1...master
+[unreleased]: https://github.com/adr/adr-log/compare/adr:2.1.2...master
+[2.1.2]: https://github.com/adr/adr-log/compare/adr:2.1.1...2.1.2
 [2.1.1]: https://github.com/adr/adr-log/compare/adr:2.1.0...2.1.1
 [2.1.0]: https://github.com/adr/adr-log/compare/adr:2.0.0...2.1.0
 [2.0.0]: https://github.com/adr/adr-log/compare/adr:1.1.0...2.0.0

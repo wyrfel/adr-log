@@ -28,7 +28,7 @@ $ npm install -g adr-log
 
 ## CLI
 
-```
+```text
 Usage: adr-log [-d <directory>] [-i] <input>
 
   input:  The markdown file to contain the table of contents.
@@ -53,7 +53,6 @@ Usage: adr-log [-d <directory>] [-i] <input>
 
 Consider a directory consisting of three files (`0000-example-1.md`, `0001-example-2.md`, `0002-example-3.md`).
 Execute following command:
-
 
 ```sh
 $ adr-log -d .
@@ -92,7 +91,6 @@ Result in following `index.md`:
 <!-- adrlogstop -->
 ```
 
-
 ## Developing
 
 - Run `node cli.js` to execute the CLI.
@@ -101,7 +99,6 @@ Result in following `index.md`:
 - You can turn on debugging output by adjusting lines 6 and 7 in `cli.js`.
 - Use [relase-it](https://www.npmjs.com/package/release-it) and [github-release-from-changelog](https://github.com/MoOx/github-release-from-changelog) for release management.
   See also [ADR-0003](docs/adr/0003-use-release-it-and-github-release-from-changelog-as-release-tooling.md).
-
 
 ## Related Tooling
 
@@ -113,7 +110,6 @@ The difference to adr-log is
 
 1. adr-log is available using `npm` and thus more easy to install.
 2. adr-tools does not include the heading of each ADR into the output.
-
 
 ## License
 
