@@ -106,7 +106,7 @@ Result in following `index.md`:
 It supports generating an ADR log by using `adr generate toc`.
 An example to can be investigated at <https://github.com/npryce/adr-tools/blob/master/tests/generate-contents.expected>.
 
-The difference to adr-log is
+The difference to adr-tools is
 
 1. adr-log is available using `npm` and thus more easy to install.
 2. adr-tools does not include the heading of each ADR into the output.
