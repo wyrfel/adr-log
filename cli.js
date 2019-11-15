@@ -55,7 +55,8 @@ var adrLogDir = args.d || defaultAdrLogDir;
 
 var defaultAdrLogFile = 'index.md';
 var adrLogFile = args._[0] || adrLogDir + '/' + defaultAdrLogFile;
-var adrLogFileName = require('path').parse(adrLogFile).base;
+var adrLogFileName = path.parse(adrLogFile).base;
+var tocDir = path.dirname(adrLogFile);
 
 console.log("adr log file:", adrLogFile);
 console.log("adr log dir:", adrLogDir);
@@ -78,7 +79,7 @@ if (fs.existsSync(adrLogFile)) {
 } else {
   existingLogString = '<!-- adrlog -->' + os.EOL + os.EOL + '<!-- adrlogstop -->' + os.EOL;
 }
-var newLogString = toc.insertAdrToc(existingLogString, headings, adrLogDir);
+var newLogString = toc.insertAdrToc(existingLogString, headings, {dir: adrLogDir, tocDir});
 
 if (args.i) {
   fs.writeFileSync(adrLogFile, newLogString);

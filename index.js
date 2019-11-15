@@ -4,8 +4,10 @@
  * Module dependencies
  */
 
-var utils = require('./lib/utils');
+const utils = require('./lib/utils');
 const fs = require('fs');
+const path = require('path');
+const slash = require('slash');
 
 /**
  * expose `toc`
@@ -43,32 +45,39 @@ function generate(options) {
       const res = {
         content: ''
       };
+
       tokens = tokens.filter(t => !!t.content);
+
       for (const token of tokens) {
-        let file;
         if (!options.dir) {
           return {content: ''};
         }
+
         const numb = token.content.match(/^\d+/m);
         if (numb === null || numb === undefined) {
           continue;
         }
-        var content = fs.readFileSync(`${options.dir}/${token.content}`).toString();
+
+        let content = fs.readFileSync(`${options.dir}/${token.content}`).toString();
+
+        let tokenPath = slash(
+          path.relative(options.tocDir, `${options.dir}${token.content}`)
+        );
 
         // does the file have front-matter?
         if (/^---/.test(content)) {
           // extract it temporarily so the syntax
           // doesn't get mistaken for a heading
-          var obj = utils.matter(content);
+          let obj = utils.matter(content);
           content = obj.content;
         }
 
         const newline = utils.determineNewline(content);
-        var title = content.split(newline)[0].substr(2);
+        let title = content.split(newline)[0].substr(2);
         console.log("title before decimal removal: ", title);
         title = title.replace(/^\d+\. /, '');
         console.log("title after decimal removal:  ", title);
-        res.content += `- [ADR-${numb[0].trim()}](${token.content}) - ${title + options.newline}`
+        res.content += `- [ADR-${numb[0].trim()}](${tokenPath}) - ${title + options.newline}`
       }
       res.content = res.content.trim();
       return res;
