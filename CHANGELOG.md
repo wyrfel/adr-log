@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NUM`.
 
-## [unreleased]
+## [2.1.3] – 2019-11-15
+
+### Fixed
+
+- `adr-log` now works with relative directories as expected. [#29](https://github.com/adr/adr-log/pull/29)
 
 ## [2.1.2] – 2019-10-27
 
@@ -43,6 +47,7 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 ## [2.0.0] – 2017-11-18
 
 ### Added
+
 - Support for comments after `adrlog` in `<!-- adrlog -->`. [#17](https://github.com/adr/adr-log/issues/17)
 - Initial support for headers (`---`) in `ADR-*.md` files.
 
@@ -86,7 +91,8 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 Initial version of adr-log.
 
-[unreleased]: https://github.com/adr/adr-log/compare/adr:2.1.2...master
+[unreleased]: https://github.com/adr/adr-log/compare/adr:2.1.3...master
+[2.1.3]: https://github.com/adr/adr-log/compare/adr:2.1.2...2.1.3
 [2.1.2]: https://github.com/adr/adr-log/compare/adr:2.1.1...2.1.2
 [2.1.1]: https://github.com/adr/adr-log/compare/adr:2.1.0...2.1.1
 [2.1.0]: https://github.com/adr/adr-log/compare/adr:2.0.0...2.1.0
