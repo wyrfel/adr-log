@@ -77,7 +77,7 @@ function generate(options) {
         console.log("title before decimal removal: ", title);
         title = title.replace(/^\d+\. /, '');
         console.log("title after decimal removal:  ", title);
-        res.content += `- [ADR-${numb[0].trim()}](${tokenPath}) - ${title + options.newline}`
+        res.content += `- [ADR-${numb[0].trim()}](${options.pathPrefix}${tokenPath}) - ${title + options.newline}`
       }
       res.content = res.content.trim();
       return res;
