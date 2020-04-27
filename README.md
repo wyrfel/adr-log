@@ -61,9 +61,9 @@ $ adr-log -d .
 This outputs following log on your console:
 
 ```markdown
-- [ADR-0000](0000-example-1.md) - Example 1
-- [ADR-0001](0001-example-2.md) - Example 2
-- [ADR-0002](0002-example-3.md) - Example 3
+* [ADR-0000](0000-example-1.md) - Example 1
+* [ADR-0001](0001-example-2.md) - Example 2
+* [ADR-0002](0002-example-3.md) - Example 3
 ```
 
 #### Generating an index.md file containing the adr log
@@ -84,9 +84,9 @@ Result in following `index.md`:
 ```markdown
 <!-- adrlog -->
 
-- [ADR-0000](0000-example-1.md) - Example 1
-- [ADR-0001](0001-example-2.md) - Example 2
-- [ADR-0002](0002-example-3.md) - Example 3
+* [ADR-0000](0000-example-1.md) - Example 1
+* [ADR-0001](0001-example-2.md) - Example 2
+* [ADR-0002](0002-example-3.md) - Example 3
 
 <!-- adrlogstop -->
 ```
