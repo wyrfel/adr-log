@@ -58,10 +58,11 @@ function generate(options) {
           continue;
         }
 
-        let content = fs.readFileSync(`${options.dir}/${token.content}`).toString();
+        let contentPath = `${options.dir}/${token.content}`
+        let content = fs.readFileSync(contentPath).toString();
 
         let tokenPath = slash(
-          path.relative(options.tocDir, `${options.dir}${token.content}`)
+          path.relative(options.tocDir, contentPath)
         );
 
         // does the file have front-matter?
