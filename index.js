@@ -9,6 +9,8 @@ const fs = require('fs');
 const path = require('path');
 const slash = require('slash');
 
+var counter = 1;
+
 /**
  * expose `toc`
  */
@@ -34,6 +36,34 @@ function toc(str, options) {
 toc.insertAdrToc = require('./lib/insert').insertAdrToc;
 
 /**
+ * extract index number or date from either filename or front matter
+ */
+function getIndex(basename, data) {
+  const numb = basename.match(/^[\d-_\\\/]*\d/m);
+  if (numb !== null && numb !== undefined) {
+    return numb[0];
+  }
+
+  if (data.index) {
+    return '' + data.index;
+  }
+
+  if (data.date) {
+    let date = data.date;
+
+    if (typeof(date) == 'object') {
+      date = date.getFullYear() + "-"
+        + ("0" + (date.getMonth() + 1)).substr(-2) + "-"
+        + ("0" + date.getDate()).substr(-2)
+    }
+
+    return date;
+  }
+
+  return '' + (counter++);
+}
+
+/**
  * Generate a markdown table of contents. This is the
  * function that does all of the main work with Remarkable.
  *
@@ -53,11 +83,6 @@ function generate(options) {
           return {content: ''};
         }
 
-        const numb = token.content.match(/^\d+/m);
-        if (numb === null || numb === undefined) {
-          continue;
-        }
-
         let contentPath = `${options.dir}/${token.content}`
         let content = fs.readFileSync(contentPath).toString();
 
@@ -65,20 +90,25 @@ function generate(options) {
           path.relative(options.tocDir, contentPath)
         );
 
+        let data = {};
+
         // does the file have front-matter?
         if (/^---/.test(content)) {
           // extract it temporarily so the syntax
           // doesn't get mistaken for a heading
           let obj = utils.matter(content);
+          data = obj.data;
           content = obj.content;
         }
+
+        let index = getIndex(path.parse(token.content).base, data);
 
         const newline = utils.determineNewline(content);
         let title = content.split(newline)[0].substr(2);
         console.log("title before decimal removal: ", title);
         title = title.replace(/^\d+\. /, '');
         console.log("title after decimal removal:  ", title);
-        res.content += `- [ADR-${numb[0].trim()}](${tokenPath}) - ${title + options.newline}`
+        res.content += `- [ADR-${index.trim()}](${tokenPath}) - ${title + options.newline}`
       }
       res.content = res.content.trim();
       return res;
