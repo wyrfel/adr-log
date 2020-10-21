@@ -11,7 +11,15 @@ We refer to [GitHub issues](https://github.com/adr/adr-log/issues) by using `#NU
 
 ### Added
 
-- New option `-p` - prefix for each ADR file path in log (useful when ADRs are in sub sub directory) 
+- New option `-p` - prefix for each ADR file path in log (useful when ADRs are in sub sub directory)
+
+### Fixed
+
+- Fixed bug where bogus path info is prepended to TOC entries when directory argument doesn't include trailing slash
+
+### Changed
+
+- Lists are now generated using `*` instead of `-`
 
 ## [2.1.3] – 2019-11-15
 
