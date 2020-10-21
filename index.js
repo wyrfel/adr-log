@@ -40,8 +40,8 @@ toc.insertAdrToc = require('./lib/insert').insertAdrToc;
  * This is the core implementation. Here, the file contents (docs/adr/dddd-*.md) are parsed and transformed into markdown.
  */
 function generate(options) {
-  return function(md) {
-    md.renderer.render = function(tokens) {
+  return function (md) {
+    md.renderer.render = function (tokens) {
       const res = {
         content: ''
       };
@@ -50,7 +50,9 @@ function generate(options) {
 
       for (const token of tokens) {
         if (!options.dir) {
-          return {content: ''};
+          return {
+            content: ''
+          };
         }
 
         const numb = token.content.match(/^\d+/m);
@@ -78,7 +80,7 @@ function generate(options) {
         console.log("title before decimal removal: ", title);
         title = title.replace(/^\d+\. /, '');
         console.log("title after decimal removal:  ", title);
-        res.content += `- [ADR-${numb[0].trim()}](${options.pathPrefix}${tokenPath}) - ${title + options.newline}`
+        res.content += `* [ADR-${numb[0].trim()}](${options.pathPrefix}${tokenPath}) - ${title + options.newline}`
       }
       res.content = res.content.trim();
       return res;
